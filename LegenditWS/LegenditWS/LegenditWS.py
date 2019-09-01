@@ -4,7 +4,7 @@ import time
 import boto3
 import requests
 transcribe = boto3.client('transcribe')
-job_name = "legendit10"
+job_name = "legendit11"
 job_uri = "s3://legendit/Molico-Que-tal-repensar-o-leite-que-você-toma.flac"
 transcribe.start_transcription_job(
     TranscriptionJobName=job_name,
