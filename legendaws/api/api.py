@@ -18,7 +18,7 @@ class TranscriptionAPI(APIView):
             transcribe = boto3.client('transcribe')
             job_name = "legendit4"
             job_uri = "s3://legendit/Molico-Que-tal-repensar-o-leite-que-você-toma.flac"
-    
+            
             transcribe.start_transcription_job(
                 TranscriptionJobName=job_name,
                 Media={'MediaFileUri': job_uri},

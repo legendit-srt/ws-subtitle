@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import TranscriptionData
 
 class TranscriptionDataSerializer(serializers.Serializer):
-    id = serializers.ReadOnlyField()
     nome = serializers.CharField()
     url = serializers.CharField()
     
