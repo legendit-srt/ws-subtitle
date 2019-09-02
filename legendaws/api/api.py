@@ -16,8 +16,8 @@ class TranscriptionAPI(APIView):
         if dataObject.is_valid():
             
             transcribe = boto3.client('transcribe')
-            job_name = "legendit4"
-            job_uri = "s3://legendit/Molico-Que-tal-repensar-o-leite-que-você-toma.flac"
+            job_name = dataObject.data['nome']
+            job_uri = dataObject.data['url']
             
             transcribe.start_transcription_job(
                 TranscriptionJobName=job_name,
