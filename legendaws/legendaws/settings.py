@@ -72,6 +72,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'legendaws.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
