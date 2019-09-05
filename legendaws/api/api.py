@@ -1,7 +1,6 @@
 from __future__ import print_function
 from django.shortcuts import render
 from django.http import HttpResponse
-import time
 import boto3
 import requests
 import json
@@ -15,26 +14,25 @@ class TranscriptionAPI(APIView):
         dataObject = TranscriptionDataSerializer(data = request.data)
         if dataObject.is_valid():
             
-            transcribe = boto3.client('transcribe')
+            transcribe = boto3.client('transcribe', region_name='us-west-2')
             job_name = dataObject.data['nome']
             job_uri = dataObject.data['url']
+            job_media = dataObject.data['media']
             
             transcribe.start_transcription_job(
                 TranscriptionJobName=job_name,
                 Media={'MediaFileUri': job_uri},
-                MediaSampleRateHertz=44100,
-                MediaFormat='flac',
+                MediaFormat=job_media,
                 LanguageCode='pt-BR'
             )
             while True:
                 resultado = transcribe.get_transcription_job(TranscriptionJobName=job_name)
                 if resultado['TranscriptionJob']['TranscriptionJobStatus'] in ['COMPLETED', 'FAILED']:
-                    break    
-            time.sleep(5)
+                    break
 
             #Retorna o Json da legenda criada
             result = requests.get(str(resultado["TranscriptionJob"]["Transcript"]["TranscriptFileUri"]))
-            #Tive que colocar pra retornar o json pra string e depois converter pra json novament, pois estava retornando com "\" no meio.
+            #Tive que colocar pra retornar o json pra string e depois converter pra json novament, pois estava retornando com "\" no meio ¯\_(ツ)_/¯.
             transcript = result.text
             retorno = json.loads(transcript)
                                           
