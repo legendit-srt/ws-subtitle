@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .serializers import TranscriptionDataSerializer
 from rest_framework.views import APIView
 from rest_framework import status
+import asyncio
 
 class TranscriptionAPI(APIView):
     def post(self,request):
@@ -29,7 +30,8 @@ class TranscriptionAPI(APIView):
                 resultado = transcribe.get_transcription_job(TranscriptionJobName=job_name)
                 if resultado['TranscriptionJob']['TranscriptionJobStatus'] in ['COMPLETED', 'FAILED']:
                     break
-
+                asyncio.sleep(5)
+                
             #Retorna o Json da legenda criada
             result = requests.get(str(resultado["TranscriptionJob"]["Transcript"]["TranscriptFileUri"]))
             #Tive que colocar pra retornar o json pra string e depois converter pra json novament, pois estava retornando com "\" no meio ¯\_(ツ)_/¯.
