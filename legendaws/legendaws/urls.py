@@ -18,6 +18,6 @@ from django.urls import path
 from api.api import TranscriptionAPI
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/legendar/', TranscriptionAPI.as_view(), name = "api_create_suntitle")
+    path('admin', admin.site.urls),
+    path('api/legendar', TranscriptionAPI.as_view(), name = "api_create_suntitle")
 ]

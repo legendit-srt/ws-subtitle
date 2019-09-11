@@ -13,12 +13,14 @@ import asyncio
 class TranscriptionAPI(APIView):
     def post(self,request):
         dataObject = TranscriptionDataSerializer(data = request.data)
+        s3Url = "s3://legendit/"
         if dataObject.is_valid():
             
             transcribe = boto3.client('transcribe', region_name='us-west-2')
             job_name = dataObject.data['nome']
-            job_uri = dataObject.data['url']
-            job_media = dataObject.data['media']
+            job_uri = s3Url + job_name            
+            job_media = job_name.split(".")[1]
+            job_name = job_name.split(".")[0]
             
             transcribe.start_transcription_job(
                 TranscriptionJobName=job_name,
