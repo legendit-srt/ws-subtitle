@@ -25,8 +25,8 @@ SECRET_KEY = '%m60edxlwxwsc$jb(9)q5)hfdly%&f9^x^cp^$xhhm*^8_$u5$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-env.n24jhtbrwm.us-west-2.elasticbeanstalk.com']
-
+ALLOWED_HOSTS = ['django-env.fc4vdtpig8.us-west-2.elasticbeanstalk.com']
+#'django-env.fc4vdtpig8.us-west-2.elasticbeanstalk.com'
 
 # Application definition
 
@@ -71,7 +71,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'legendaws.wsgi.application'
 
+S3DIRECT_REGION = 'us-west-2'
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
